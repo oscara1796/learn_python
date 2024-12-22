@@ -101,6 +101,7 @@ documents = {
   4:'''The Great Benefit of Test Driven Development Nobody Talks About The feeling of productivity because you are writing lots of code Think about that for a moment Ask any developer who wants to develop why they became a developer One of the first things that comes up is I enjoy writing code This is one of the things that I personally enjoy doing Writing code any code especially when its solving my current problem makes me feel productive It makes me feel like Im getting somewhere Its empowering''',
   5:'''Setting up GIT to use a Subversion SVN style workflow Moving from Subversion SVN to GIT can be a little confusing at first I think the biggest thing I noticed was that GIT doesnt have a specific workflow you have to pick your own Personally I wanted to stick to my Subversion like work-flow with a central server which all my machines would pull and push too Since it took a while to set up I thought I would throw up a blog post on how to do it''',
   6:'''Why CAPTCHA Never Use Numbers 0 1 5 7 Interestingly this sort of question pops up a lot in my referring search term stats Why CAPTCHAs never use the numbers 0 1 5 7 Its a relativity simple question with a reasonably simple answer Its because each of the above numbers are easy to confuse with a letter See the below''',
+  7:''' Durante las últimas horas, en la red social de ‘X’ se colocó en tendencia el nombre del conductor de espectáculos, PEDRO SOLA , quien encabezaría una controversia con el titular de la Secretaría de Economía, Marcelo Ebrard. Dicha situación se desencadenó con motivo a las declaraciones de ambos personajes públicos con referencia al cateo realizado en la Plaza Izazaga 89, en la Ciudad de México. El pasado 28 de noviembre, Marcelo Ebrard Casaubón anunció la incautación de un establecimiento comercial que se ubicaba en la alcaldía Cuauhtémoc, el cual era conocido bajo el nombre de ‘Plaza Izazaga 89′, en el inmueble las autoridades decomisaron un total de 88 mil productos que, presuntamente, fueron ingresados ingresados de forma ilegal.''',
 }
 
 index = {
@@ -111,6 +112,7 @@ index = {
 4:v.concordance(documents[4].lower()),
 5:v.concordance(documents[5].lower()),
 6:v.concordance(documents[6].lower()),
+7:v.concordance(documents[7].lower()),
 }
 
 searchterm = input('Enter Search Term: ')
@@ -119,7 +121,7 @@ matches = []
 for i in range(len(index)):
   relation = v.relation(v.concordance(searchterm.lower()),index[i])
   if relation > 0:
-    matches.append((relation,documents[i][:100]))
+    matches.append((relation,documents[i][:150]))
 
 matches.sort(reverse=True)
 
