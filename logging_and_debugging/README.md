@@ -754,3 +754,43 @@ logger.debug('This is a debug message')
 *   **Reusability**: Configuration files can be shared across projects or teams.
     
 *   **Clarity**: YAML provides a clean, readable structure for complex configurations.
+
+
+In Python's logging module, the **style** parameter is used to define the type of placeholder for your format string. The style parameter specifies which style of string formatting to use when configuring a Formatter.
+
+### Accepted Values for style:
+
+*   '%' (default): Uses the %-style placeholders (e.g., '%(levelname)s').
+    
+*   '{': Uses str.format-style placeholders (e.g., '{levelname}').
+    
+*   '$': Uses string.Template-style placeholders (e.g., '$levelname').
+
+```python
+import logging
+
+# Configure the logger
+formatter = logging.Formatter(
+    fmt='{asctime} - {name} - {levelname} - {message}', 
+    style='{'
+)
+
+handler = logging.StreamHandler()
+handler.setFormatter(formatter)
+
+logger = logging.getLogger('example')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(handler)
+
+# Log a message
+logger.debug('This is a debug message')
+```
+Output:
+```python
+2024-12-20 14:00:00,123 - example - DEBUG - This is a debug message
+```
+### Notes:
+
+*   By default, the logging module uses the '%' style, so you don’t need to specify style='%' unless you want to make it explicit.
+    
+*   The style parameter is particularly useful if you prefer the more modern str.format syntax or string.Template style for custom logging formats.
