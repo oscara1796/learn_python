@@ -754,3 +754,8 @@ logger.debug('This is a debug message')
 *   **Reusability**: Configuration files can be shared across projects or teams.
     
 *   **Clarity**: YAML provides a clean, readable structure for complex configurations.
+
+
+[This is the code of the logging module](https://github.com/python/cpython/blob/d730719b094cb006711b1cd546927b863c173b31/Lib/logging/__init__.py#L804)
+
+[Python Logging Flow Documentation](https://docs.python.org/3.5/howto/logging.html#logging-flow)
