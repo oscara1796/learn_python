@@ -36,10 +36,76 @@ pdb also supports post-mortem debugging, which allows you to enter the debugger 
 To start post-mortem debugging:
 
 ```python 
-python3 -m pdb
+python3 -m pdb <script_name>
 ``` 
 
-This is particularly useful for debugging scripts you don’t have write access to.
+#### How It Works
+
+Post-mortem debugging is initiated when your program encounters an unhandled exception. The debugger will pause execution and drop you into the interactive debugging mode, allowing you to investigate the state of the program at the moment the exception occurred.
+
+You can:
+
+*   Inspect the stack trace to identify where the error originated.
+    
+*   Examine the values of variables to understand the program's state at the time of failure.
+    
+*   Step through the code to analyze the flow leading to the exception.
+    
+
+#### Advantages
+
+*   **No Code Modification Required**: Ideal for debugging third-party scripts or production code you cannot modify.
+    
+*   **Quick Error Analysis**: Provides immediate insight into the root cause of runtime errors without prior setup.
+    
+*   **Works with Any Python Script**: Can be used with any Python program, even those not designed for debugging.
+
+#### Example
+
+Consider a script example2.py with the following content:
+
+```python
+def divide(a, b):
+    return a / b
+
+result = divide(10, 0)
+```
+Running this script normally would result in a ZeroDivisionError. To debug it with post-mortem debugging:
+
+```python
+python3 -m pdb example2.py
+```
+When the exception occurs, you’ll see output like this:
+
+```python
+Traceback (most recent call last):
+  File "example2.py", line 4, in <module>
+    result = divide(10, 0)
+  File "example2.py", line 2, in divide
+    return a / b
+ZeroDivisionError: division by zero
+> example2.py(2)divide()
+-> return a / b
+```
+
+Now you’re in the interactive debugger and can:
+
+*   Use p to inspect variables (p a, p b).
+    
+*   Use up and down to navigate the stack trace.
+    
+*   Use l to view surrounding lines of code.
+    
+
+#### Limitations
+
+*   **Post-Mortem Only**: You can only debug after an exception occurs.
+    
+*   **Read-Only**: While you can inspect variables and navigate the stack, you cannot change the code or program state.
+    
+
+Despite these limitations, post-mortem debugging is a powerful tool for diagnosing issues in scripts where you cannot set traditional breakpoints.
+
 
 Example: Setting a Breakpoint
 -----------------------------
