@@ -794,3 +794,7 @@ Output:
 *   By default, the logging module uses the '%' style, so you don’t need to specify style='%' unless you want to make it explicit.
     
 *   The style parameter is particularly useful if you prefer the more modern str.format syntax or string.Template style for custom logging formats.
+
+[This is the code of the logging module](https://github.com/python/cpython/blob/d730719b094cb006711b1cd546927b863c173b31/Lib/logging/__init__.py#L804)
+
+[Python Logging Flow Documentation](https://docs.python.org/3.5/howto/logging.html#logging-flow)
