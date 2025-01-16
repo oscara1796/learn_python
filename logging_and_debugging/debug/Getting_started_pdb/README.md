@@ -218,3 +218,97 @@ In this demonstration, the script includes a breakpoint set at **line 14**, wher
     
 
 By combining these commands, developers can effectively trace program execution, inspect variable values, and debug their code with precision. This approach is especially useful for identifying and fixing issues in complex scripts or functions.
+
+### Advanced Debugging with pdb: Setting and Managing Breakpoints
+
+Debugging often requires flexibility to efficiently navigate through code, especially when you want to skip unnecessary lines or set new breakpoints while already debugging. The Python Debugger (pdb) makes this process straightforward with commands for setting breakpoints, continuing execution, and even creating conditional breakpoints. Here's a detailed explanation of these features:
+
+#### Setting New Breakpoints During Debugging
+
+After hitting an initial breakpoint, you can set additional breakpoints and continue execution up to those points without stepping through every line. This is useful for targeting specific areas in your code.
+
+##### Example Scenario
+
+In the example, there are two files:
+
+1.  example4.py: The main script importing a module.
+    
+2.  util.py: A separate module containing the get\_path() function from earlier.
+    
+3.  **Setting a New Breakpoint in a Module:**
+    
+    *   Run the example4.py script, and execution stops at the breakpoint on **line 7**.
+        
+    *   To set a new breakpoint at **line 5** of the util module, use the command: 
+    ```python
+        b util:5
+    ```
+    *  This tells pdb to create a breakpoint in the util module at line 5. The debugger confirms the breakpoint creation.
+    
+2.  **Continuing Execution:**
+    
+    *   Use the c command to continue execution until the newly set breakpoint is hit. In this case, the debugger halts at the return line of get\_path().
+        
+3.  **Listing and Managing Breakpoints:**
+    
+    *   Type b to view all active breakpoints. Each breakpoint is assigned a number and shows how many times it has been hit.
+        
+    *   Manage breakpoints with the following commands:
+        
+        *   **enable** : Enable a specific breakpoint.
+            
+        *   **disable** : Disable a specific breakpoint.
+            
+        *   **cl** : Clear (delete) a specific breakpoint.
+            
+
+#### Using Conditional Breakpoints
+
+Conditional breakpoints allow execution to halt only when a specified condition is met. This feature is particularly helpful for debugging specific scenarios.
+
+##### Example Scenario with Conditional Breakpoints
+
+The get\_path() function is expected to return an absolute path, which always starts with a forward slash (/) on Unix-based systems. If the path is not absolute, debugging is triggered.
+
+1.  **Setting a Conditional Breakpoint:**
+    
+    *   Restart the program and set a conditional breakpoint using: 
+    ```python
+        b util.get_path, not filename.startswith('/')
+    ```
+    * This sets a breakpoint at the start of the get\_path() function, but only when the filename argument does not begin with /.
+    
+    *  **Continuing Execution:**
+        
+        *   Run the script again. Execution stops at the conditional breakpoint because the filename starts with a . (relative path) instead of /.
+            
+    *  **Inspecting Function Arguments:**
+        
+        *   Use the a command to view arguments passed to the function. This confirms that the filename provided does not meet the condition for an absolute path.
+            
+
+#### Important Notes on Conditional Breakpoints
+
+*   When setting breakpoints by function name (e.g., b util.get\_path), the conditional expression should reference only variables or arguments available at the start of the function. Using undefined variables will cause the debugger to halt unconditionally.
+    
+*   Conditional breakpoints are a powerful tool for targeting specific behaviors without cluttering the debugging process with unnecessary stops.
+    
+
+#### Summary of Key Commands
+
+*   **b :**: Sets a breakpoint at a specific line in a file.
+    
+*   **b ,** : Sets a conditional breakpoint that triggers only if the condition evaluates to True.
+    
+*   **c (continue):** Resumes execution until the next breakpoint.
+    
+*   **a (args):** Displays the arguments passed to the current function.
+    
+*   **b (list breakpoints):** Lists all active breakpoints.
+    
+*   **enable/disable** : Enables or disables the specified breakpoint.
+    
+*   **cl** : Clears a specific breakpoint.
+    
+
+By combining these commands, you can efficiently debug complex scripts, focus on specific code sections, and handle conditional scenarios with ease. For more information on breakpoints and advanced pdb features, refer to the video notes or the official Python documentation.
