@@ -170,3 +170,51 @@ Key Takeaways
     
 
 Great job following along! Next, we’ll explore more advanced uses of the p command to deepen our debugging skills.
+
+### Debugging with pdb: Using n (next) and s (step)
+
+When debugging Python code with the pdb (Python Debugger) tool, there are two essential commands to navigate through the code: n (short for **next**) and s (short for **step**). These commands allow developers to control how they move through the program during execution.
+
+The n command is equivalent to **step over**, meaning it moves to the next line of code, skipping the execution of any function calls on the current line. On the other hand, the s command is equivalent to **step into**, allowing you to dive into the code of a function call and examine its inner workings.
+
+Here’s an example of how these commands work:
+
+#### Example Script: example3
+
+In this demonstration, the script includes a breakpoint set at **line 14**, where the program halts execution. Before the breakpoint, a variable filename\_path is assigned the relative file path returned by the get\_path() function, which is then printed.
+
+1.  **Using n (next):**
+    
+    *   After hitting the breakpoint at line 14, typing n skips the execution of the get\_path() function call. The program moves directly to the print() line.
+        
+    *   At this point, the variable filename\_path can be inspected by typing p filename\_path. The output shows '.', representing the current directory, since the script is located there.
+        
+    *   By skipping the function call, the debugger avoids entering the internal details of the get\_path() function.
+        
+2.  **Using s (step into):**
+    
+    *   Restarting the program and typing s at the breakpoint at line 14 results in stepping into the get\_path() function. This action is marked by the --Call-- message in the debugger output, indicating that the program is entering a function call.
+        
+    *   The debugger shows the function definition on **line 6**. From here, you can use n to proceed line by line within the function or press Enter to repeat the last n command.
+        
+    *   Upon reaching the return statement in the get\_path() function, the debugger displays a --Return-- message. This output also shows the value being returned by the function (in this case, '.'), represented by the arrow (->) following the function name.
+        
+    *   Continuing with n, the debugger exits the function and returns to the main program. The print() statement is executed, displaying path = . in the console output.
+        
+3.  **Exiting the Debugger:**
+    
+    *   After completing execution at the module level, the debugger shows a --Return-- message, indicating the return from the module, which yields a NoneType. Typing Enter again concludes the debugging session.
+        
+
+#### Summary of Key Commands:
+
+*   **n (next):** Moves to the next line of code, skipping any function calls.
+    
+*   **s (step):** Steps into a function call, allowing you to debug the function’s code line by line.
+    
+*   **p (print):** Prints the value of a variable or expression.
+    
+*   **q (quit):** Exits the debugger.
+    
+
+By combining these commands, developers can effectively trace program execution, inspect variable values, and debug their code with precision. This approach is especially useful for identifying and fixing issues in complex scripts or functions.
