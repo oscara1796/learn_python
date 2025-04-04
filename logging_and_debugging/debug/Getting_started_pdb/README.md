@@ -312,3 +312,73 @@ The get\_path() function is expected to return an absolute path, which always st
     
 
 By combining these commands, you can efficiently debug complex scripts, focus on specific code sections, and handle conditional scenarios with ease. For more information on breakpoints and advanced pdb features, refer to the video notes or the official Python documentation.
+
+### Understanding the unt Command in pdb
+
+The unt (short for **until**) command in the Python Debugger (pdb) allows you to continue program execution up to a specific point in your code. Its behavior depends on whether or not a line number is supplied, offering flexible ways to navigate through loops or skip sections of code without stepping through every single line.
+
+#### Overview of unt
+
+1.  **With a Line Number**:
+    
+    *   When you supply a line number to the unt command, execution will continue until a line with a number **greater than or equal to the specified line** is reached.
+        
+    *   This is similar to the c (continue) command, but with unt, you explicitly define where to stop.
+        
+2.  **Without a Line Number**:
+    
+    *   If no line number is supplied, unt will behave like the n (next) command, stopping at the **next line with a number greater than the current one**.
+        
+    *   The key difference between n and unt is that n stops at the next logically executed line, while unt strictly moves forward to a line with a higher number.
+        
+
+#### Example Usage with a For Loop
+
+To demonstrate the unt command, consider a file named example4unt.py. This script contains the familiar get\_path() function, but with an added **for loop** that iterates through each character in a string called tail.
+
+1.  **Starting the Debugger**:
+    
+    *   Run the program with ./example4unt.py, and execution halts at a breakpoint.
+        
+    *   To view the function's contents, use the ll (long list) command. This highlights the current line of execution with an arrow (->).
+        
+2.  **Using unt Without a Line Number**:
+    
+    *   Typing unt at this point behaves like n, advancing execution to the next line. This takes you to the start of the for loop.
+        
+    *   Pressing Enter implicitly runs unt again, advancing to the next iteration of the loop. Continue pressing Enter until you exit the loop entirely.
+        
+3.  **Skipping the Entire Loop**:
+    
+    *   Using n in a loop iterates one step at a time, requiring repeated commands to go through each iteration. In contrast, unt automatically completes the loop, advancing execution to the next line after the loop.
+        
+    *   This can save significant time and effort when debugging code with multiple iterations.
+        
+4.  **Validating Execution**:
+    
+    *   After exiting the loop, use p char, tail to inspect the values of char and tail. The char variable will now hold the last character in the tail string, confirming that the loop executed completely.
+        
+
+#### Key Points
+
+*   **unt with a Line Number**: Acts as a targeted c command, continuing execution until a specific line.
+    
+*   **unt Without a Line Number**: Functions like n, but strictly moves forward to a higher line number, skipping over loops or repetitive blocks of code.
+    
+*   **Efficiency in Loops**: By skipping over entire loops or repetitive sections, unt streamlines the debugging process and eliminates the need for multiple n commands.
+    
+
+#### Commands Summary
+
+*   **unt \[line\_number\]**: Continue execution until the specified line number (or the next higher line if no number is provided).
+    
+*   **n**: Moves to the next logical line of execution.
+    
+*   **ll**: Displays the function or module's code, showing the current execution line with an arrow.
+    
+*   **p** : Prints the value of a variable for inspection.
+    
+*   **Enter**: Repeats the last executed command, such as unt.
+    
+
+By leveraging the unt command effectively, you can streamline your debugging sessions and focus on areas of interest without unnecessary stops. This flexibility is particularly valuable in loops or when working through iterative code structures.
